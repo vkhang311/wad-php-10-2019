@@ -14,11 +14,13 @@
     </execution>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1RYYDbfsmvpINQilSdGIB0rSj5a" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -32,6 +34,16 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="test1.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:50374/session1/test1.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.test1.php" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -43,6 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1569845377290</updated>
       <workItem from="1569845379650" duration="104000" />
+      <workItem from="1569845896356" duration="2353000" />
     </task>
     <servers />
   </component>
@@ -54,7 +67,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
