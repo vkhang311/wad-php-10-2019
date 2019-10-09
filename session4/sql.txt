@@ -1,0 +1,3 @@
+b/ SELECT * FROM `users` WHERE fullName LIKE '%a%';
+c/ UPDATE `users` SET `email`='test@gmail.com' WHERE fullName LIKE '%n%' OR phoneNumber LIKE %5%;
+d/ DELETE FROM `users` WHERE email LIKE '%gmail' AND birthdate LIKE '1997%' AND phoneNumber LIKE '%8%';
