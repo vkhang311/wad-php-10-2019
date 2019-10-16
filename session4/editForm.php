@@ -21,7 +21,7 @@
 
             <tr>
                 <td><label class="control-label">Username.</label></td>
-                <td><input class="form-control" type="text" name="user_name"  value="<?php echo $name; ?>" /></td>
+                <td><input class="form-control" type="text" name="user_name"  value="<?php echo $fullname; ?>" /></td>
             </tr>
 
             <tr>
@@ -57,7 +57,7 @@
 
 <?php
     error_reporting( ~E_NOTICE );
-    require_once 'connect.php';
+    require_once 'dbConfig.php';
 
     if(isset($_GET['edit_id']) && !empty($_GET['edit_id']))
     {
@@ -75,7 +75,7 @@
     if(isset($_POST['btn_save_updates']))
     {
         $id = $_POST['user_id'];// user id
-        $name = $_POST['user_name'];// user name
+        $fullname = $_POST['user_name'];// user name
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $birthdate = $_POST['birthdate'];
@@ -117,14 +117,15 @@
         // if no error occured, continue ....
         if(!isset($errMSG))
         {
-            $stmt = $connect->prepare('UPDATE tbl_users 
-                  SET userName=:uname, 
-                   userProfession=:ujob, 
-                   userPic=:upic 
-                   WHERE userID=:uid');
+            $stmt = $connect->prepare('UPDATE users 
+                  SET fullName=:uname, 
+                   phone=:uphone, 
+                   email=:uemail
+                   WHERE id=:uid');
             $stmt->bindParam(':uname',$username);
-            $stmt->bindParam(':ujob',$userjob);
-            $stmt->bindParam(':upic',$userpic);
+            $stmt->bindParam(':ubirthdate',$birthdate);
+            $stmt->bindParam(':uphone',$phone);
+            $stmt->bindParam(':uemail',$email);
             $stmt->bindParam(':uid',$id);
 
             if($stmt->execute()){

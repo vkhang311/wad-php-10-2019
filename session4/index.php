@@ -11,28 +11,29 @@
 </head>
 <boby>
     <div class="row">
-        <?php
-        error_reporting( ~E_NOTICE ); // avoid notice
-        require_once 'connect.php';
-        $stmt = $connect->prepare('SELECT id, name, email, avatar FROM users ORDER BY id DESC');
-        $stmt->execute();
 
-        if($stmt->rowCount() > 0)
-        {
-            while($row=$stmt->fetch(PDO::FETCH_ASSOC))
+            <?php
+            error_reporting( ~E_NOTICE ); // avoid notice
+            require_once 'dbConfig.php';
+            $stmt = $connect->prepare('SELECT id, fullName, email, avatar FROM users ORDER BY id DESC');
+            $stmt->execute();
+            if($stmt->rowCount() > 0)
             {
-                extract($row);
-                ?>
-                <div class="col-xs-3">
-                    <p class="page-header"><?php echo $name."&nbsp;/&nbsp;"; ?></p>
-                    <img src="user_images/<?php echo $row['avatar']; ?>" class="img-rounded" width="250px" height="250px" />
-                    <p class="page-header">
-        <span>
-        <a class="btn btn-info" href="editform.php?edit_id=<?php echo $row['userID']; ?>" title="click for edit" onclick="return confirm('sure to edit ?')"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-        <a class="btn btn-danger" href="?delete_id=<?php echo $row['id']; ?>" title="click for delete" onclick="return confirm('sure to delete ?')"><span class="glyphicon glyphicon-remove-circle"></span> Delete</a>
-        </span>
-                    </p>
-                </div>
+                while($row=$stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    extract($row);
+                    ?>
+                    <div class="col-md-2">
+                        <p class="page-header"><?php echo $row['fullName']."&nbsp;/&nbsp;" . $row['email']; ?></p>
+                        <img src="user_images/<?php echo $row['avatar']; ?>" class="img-rounded" width="250px" height="250px" />
+                        <p class="page-header">
+                            <span>
+                            <a class="btn btn-info" href="editform.php?edit_id=<?php echo $row['id']; ?>" title="click for edit" onclick="return confirm('sure to edit ?')"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <a class="btn btn-danger" href="?delete_id=<?php echo $row['id']; ?>" title="click for delete" onclick="return confirm('sure to delete ?')"><span class="glyphicon glyphicon-remove-circle"></span> Delete</a>
+                            </span>
+                        </p>
+                    </div>
+    </div>
                 <?php
             }
         }

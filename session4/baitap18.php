@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <?php
         error_reporting( ~E_NOTICE ); // avoid notice
-        require_once 'connect.php';
+        require_once 'dbConfig.php';
         $sql18a = "ALTER TABLE users ADD avatar varchar(255) ";
         if (mysqli_query($connect, $sql18a) == TRUE){
             echo "Updated success";
