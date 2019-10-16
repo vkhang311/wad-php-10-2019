@@ -48,12 +48,16 @@
         $categoriesId = $_POST['categories_id'];
         $created = date("Y-m-d H:i:s");
         $image = 'product_image_default.png';
+       /* var_dump($_FILES);
+        exit(); */
         $image_file = $_FILES['image'];
+
         if ($image_file['error'] == 0) {
             $image = $image_file['name'];
             move_uploaded_file($image_file['tmp_name'], 'upload/'.$image);
         }
-        $sql = "UPDATE products SET name = '$name' WHERE id =$id";
+        $sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount',
+                    status = '$status', categories_id = '$categoriesId', images = '$image', created = '$created' WHERE id =$id";
         if (mysqli_query($connect, $sql) === TRUE) {
             header("Location: list_product.php");
         }
@@ -135,15 +139,12 @@
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Edit a product!</h1>
                       </div>
-                      <form class="user" action="#" method="POST">
+                      <form class="user" action="#" method="POST" enctype='multipart/form-data'>
                           <div class="form-group">
                               <input type="text" class="form-control form-control-user" name="name" placeholder="Product name" value="<?php echo $oldName;?>">
                           </div>
                           <div class="form-group">
                               <input type="text" class="form-control form-control-user" name="description" placeholder="Description" value="<?php echo $oldDescription;?>">
-                          </div>
-                          <div class="form-group">
-                              <input type="file" name="image" >
                           </div>
                           <div class="form-group">
                               <input type="text" class="form-control form-control-user" name="price" placeholder="Price" value="<?php echo $oldPrice;?>">
