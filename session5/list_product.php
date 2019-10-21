@@ -28,11 +28,9 @@
 
   <?php include 'common/sidebar.php';?>
   <?php include 'connect.php';?>
-  <?php 
-
+  <?php
       $sql = "SELECT * FROM products";
       $result = mysqli_query($connect, $sql);
-
   ?>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">

@@ -39,6 +39,7 @@
      $oldDiscount = $row['discount'];
      $oldStatus = $row['status'];
      $oldCategoriesId = $row['categories_id'];
+     $oldImage = $row['images'];
     if(isset($_POST['edit_product'])) {
         $name = $_POST['name'];
         $description = $_POST['description'];
@@ -46,8 +47,7 @@
         $discount = $_POST['discount'];
         $status = $_POST['status'];
         $categoriesId = $_POST['categories_id'];
-        $created = date("Y-m-d H:i:s");
-        $image = 'product_image_default.png';
+        $image = $oldImage;
        /* var_dump($_FILES);
         exit(); */
         $image_file = $_FILES['image'];
@@ -57,7 +57,7 @@
             move_uploaded_file($image_file['tmp_name'], 'upload/'.$image);
         }
         $sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount',
-                    status = '$status', categories_id = '$categoriesId', images = '$image', created = '$created' WHERE id =$id";
+                    status = '$status', categories_id = '$categoriesId', images = '$image' WHERE id =$id";
         if (mysqli_query($connect, $sql) === TRUE) {
             header("Location: list_product.php");
         }
@@ -156,11 +156,25 @@
                               <input type="text" class="form-control form-control-user" name="status" placeholder="Status" value="<?php echo $oldStatus;?>">
                           </div>
                           <div class="form-group col-lg-3">
+                              <?php
+                                 $sql1 = "SELECT * FROM product_categories ";
+                                 $result1 = mysqli_query($connect, $sql1);
+                              ?>
                               <select class="form-control " name="categories_id" value="<?php echo $oldCategoriesId;?>">
-                                  <option value="">Select category</option>
-                                  <option value="1">Mobile Phone</option>
-                                  <option value="2">Laptop</option>
-                                  <option value="3">Another</option>
+                                  <?php
+                                  $sql2 = "SELECT * FROM product_categories WHERE id = '$oldCategoriesId'";
+                                  $result2 = mysqli_query($connect, $sql2);
+                                  if ($result2->num_rows > 0) {?>
+                                        <?php while($row = $result2->fetch_assoc()){?>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                      <?php }
+                                    }
+
+                                   if ($result1->num_rows > 0) {?>
+                                      <?php while($row = $result1->fetch_assoc()){?>
+                                          <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                   <?php }
+                                   } ?>
                               </select>
                           </div>
                         <div class="form-group">

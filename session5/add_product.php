@@ -146,11 +146,19 @@
                               <input type="text" class="form-control form-control-user" name="status" placeholder="Status">
                           </div>
                           <div class="form-group col-lg-3">
+                              <?php
+                                 $sql1 = "SELECT * FROM product_categories ";
+                                 $result = mysqli_query($connect, $sql1);
+                              ?>
                               <select class="form-control " name="categories_id">
-                                  <option value="">Select category</option>
-                                  <option value="1">Mobile Phone</option>
-                                  <option value="2">Laptop</option>
-                                  <option value="3">Another</option>
+                                  <option value="">Select Category</option>
+                                  <?php if ($result->num_rows > 0) { ?>
+                                      <?php while ($row = $result->fetch_assoc()) { ?>
+                                          <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                  <?php }
+                                      }
+                                  ?>
+
                               </select>
                           </div>
                         <input type="submit" name="add_product" value="Add product" class="btn btn-primary btn-user btn-block" >
